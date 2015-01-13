@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <form class="form-horizontal" action="/account/signin/" role="form" method="post">
+                <legend>用户登录</legend>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                        <input class="form-control" type="type" name="username" id="username" required/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-lock"></i>
+                        </span>
+                        <input class="form-control" type="password" name="password" id="password" required />
+                    </div>
+                </div>
+                <div class="form-group"> 
+                    <button class="btn btn-primary" type="submit">
+                        {% bootstrap_icon "log-in" %} 登 录
+                    </button>
+                    <a href="/account/signup/" class="btn btn-success">
+                        {% bootstrap_icon "heart"%} 注 册
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
