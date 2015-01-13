@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load bootstrap3 %}
-
 {% block content %}
     <div class="container">
         <div class="row">
@@ -25,10 +23,10 @@
                 </div>
                 <div class="form-group"> 
                     <button class="btn btn-primary" type="submit">
-                        {% bootstrap_icon "log-in" %} 登 录
+                        <i class="glyphicon glyphicon-log-in"></i> 登 录
                     </button>
                     <a href="/account/signup/" class="btn btn-success">
-                        {% bootstrap_icon "heart"%} 注 册
+                        <i class="glyphicon glyphicon-heart"></i> 注 册
                     </a>
                 </div>
             </form>

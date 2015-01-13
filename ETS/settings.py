@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     # 'django.contrib.staticfiles',
     'account',
-    'bootstrap3',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -92,6 +91,6 @@ STATIC_URL = '/static/'
 
 # template
 TEMPLATE_DIRS = (
-    os.path.join(STATIC_ROOT, '/bootstrap3/templates/'),
+    os.path.join(STATIC_ROOT, ''),
     os.path.join(BASE_DIR, '/account/templates/'),
 )

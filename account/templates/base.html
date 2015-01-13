@@ -1,6 +1,16 @@
-{% extends 'bootstrap.html' %}
-{% load bootstrap3 %}
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../../static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>{% block title %}{% endblock %}</title>
+<body>
+{% block content %}{% endblock %}
 
-{% block bootstrap3_content %}
-    {% block content %}(no content){% endblock %}
-{% endblock %}
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
