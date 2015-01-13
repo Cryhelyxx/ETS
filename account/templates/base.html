@@ -5,12 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../../static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../static/bower_components/Buttons/css/buttons.min.css" rel="stylesheet" />
     <title>{% block title %}{% endblock %}</title>
 <body>
 {% block content %}{% endblock %}
 
 
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+
+{% block footer %}{% endblock %}
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
