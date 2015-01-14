@@ -8,6 +8,7 @@ from django import forms
 
 from models import User
 from account_md5 import md5
+from mailer import send_email
 
 # Create your views here.
 def login(req):
@@ -44,6 +45,7 @@ def register(req):
             return HttpResponse('用户已存在， 请直接登录')
         # 插入到数据库
         User.objects.create(username = username, password = password)
+        send_email()
         return HttpResponse('注册成功！')
     return render_to_response('signup.html', None, context_instance=RequestContext(req))
 

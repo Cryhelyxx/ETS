@@ -94,3 +94,11 @@ TEMPLATE_DIRS = (
     os.path.join(STATIC_ROOT, ''),
     os.path.join(BASE_DIR, '/account/templates/'),
 )
+
+# email config
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST = 'smtp.qq.com'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_HOST_USER = 'youremail@163.com'
+EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_USER_TLS = True
