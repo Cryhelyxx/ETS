@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important; /*除非你需要IE6的支持*此行与下一行是没有必要的*/
+    height: 100%;
+    margin: 0 auto -155px; /*下边距为页脚的高度的负值*/
+}
+.footer, .push {
+    height: 155px; 		/*.push必须是相同的高度。.footer*/
+}
+
+/*
+
+Sticky Footer by Ryan Fait
+http://ryanfait.com/
+
+*/

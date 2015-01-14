@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.navbar-inverse {
+    border-radius: 0px;
+}
+
+.navbar-nav {
+    font-size: 15px;
+
+}
+
+.navbar-item {
+    font-size: 15px;
+}
