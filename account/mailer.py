@@ -16,16 +16,16 @@ def send_html_mail(subject, html_content, recipient_list):
     msg.send()
 
 
-def send_email():
-    subject = "邮件主题"
-    html_content = '<p>This is an <strong>important</strong> message.</p>'
+def send_email(user_email, username):
+    subject = "[ETS简单交易系统]确认你的邮箱地址"
+    # html_content = '<p>This is an <strong>important</strong> message.</p>'
 
-    ''''
+    template_path = 'activate_email.html'
     html_content = loader.render_to_string(
         template_path,          # 需要渲染的html模板
         {
-            'paramters': paramters  # 参数
+            'username': username  # 参数
         }
     )
-    '''
-    send_html_mail(subject, html_content, ['929679459@qq.com', '1658000644@qq.com'])
+    print html_content 
+    send_html_mail(subject, html_content, [user_email])

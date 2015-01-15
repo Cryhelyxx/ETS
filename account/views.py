@@ -36,16 +36,18 @@ def register(req):
     if req.method == 'POST':
         username = req.POST.get('username')
         password = req.POST.get('password')
+        email = req.POST.get('email')
         print username
         print password
+        print email
         password = md5(password)
         user = User.objects.filter(username__exact = username, password__exact = password)
         # 如果用户已存在
         if user:
             return HttpResponse('用户已存在， 请直接登录')
         # 插入到数据库
-        User.objects.create(username = username, password = password)
-        send_email()
+        User.objects.create(username = username, password = password, email = email)
+        send_email(email, username)
         return HttpResponse('注册成功！')
     return render_to_response('signup.html', None, context_instance=RequestContext(req))
 

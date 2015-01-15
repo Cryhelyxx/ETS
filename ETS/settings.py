@@ -71,7 +71,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-cn'
 
 TIME_ZONE = 'UTC'
 
@@ -90,15 +90,17 @@ STATIC_URL = '/static/'
 
 
 # template
+
 TEMPLATE_DIRS = (
     os.path.join(STATIC_ROOT, ''),
-    os.path.join(BASE_DIR, '/account/templates/'),
+    os.path.join(os.path.dirname(__file__), '/account/templates/'),
 )
+
 
 # email config
 # EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST = 'smtp.qq.com'
+# EMAIL_HOST = 'smtp.exmail.qq.com'
 EMAIL_HOST = 'smtp.163.com'
-EMAIL_HOST_USER = 'youremail@163.com'
-EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_HOST_USER = 'cryhelyzxx@163.com'
+EMAIL_HOST_PASSWORD = 'zxx&qxf865320179'
 EMAIL_USER_TLS = True
