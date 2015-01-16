@@ -6,6 +6,7 @@ from django.core.mail import EmailMessage
 from django.template import loader
 
 from django.conf import settings
+from django import template
 # from settings import EMAIL_HOST_USER    # 项目配置邮件地址
 # from django.conf.settings import EMAIL_HOST_USER
 
@@ -19,7 +20,7 @@ def send_html_mail(subject, html_content, recipient_list):
 def send_email(user_email, username):
     subject = "[ETS简单交易系统]确认你的邮箱地址"
     # html_content = '<p>This is an <strong>important</strong> message.</p>'
-
+    
     template_path = 'activate_email.html'
     html_content = loader.render_to_string(
         template_path,          # 需要渲染的html模板
@@ -27,5 +28,10 @@ def send_email(user_email, username):
             'username': username  # 参数
         }
     )
+    '''
+    t = 'activate_email.html'
+    c = template.Context({'username': username})
+    html_content = t.render(c)
+    '''
     print html_content 
     send_html_mail(subject, html_content, [user_email])
