@@ -26,7 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+AUTH_USER_MODEL = 'account.User'
 
 # Application definition
 
@@ -98,8 +98,6 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (
     os.path.join(STATIC_ROOT, ''),
     os.path.join(os.path.dirname(__file__), '/account/templates/'),
-    os.path.join(STATIC_ROOT, '/admin/'),
-    os.path.join(STATIC_ROOT, '/debug_toolbar/')
 )
 
 
@@ -107,9 +105,11 @@ TEMPLATE_DIRS = (
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_HOST = 'smtp.exmail.qq.com'
 EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = '25'
 EMAIL_HOST_USER = 'youremail@163.com'
 EMAIL_HOST_PASSWORD = 'yourpassword'
 EMAIL_USER_TLS = True
+
 '''
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
