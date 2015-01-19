@@ -13,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^account/', include('account.urls')),
 # ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # ) + static(settings.STATIC_URL)
-) + static(settings.STATIC_URL)
+#) + static(settings.STATIC_URL)
+)
