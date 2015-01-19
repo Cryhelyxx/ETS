@@ -55,7 +55,8 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'ETS.urls'
 
 WSGI_APPLICATION = 'ETS.wsgi.application'
-INTERNAL_IPS = ('127.0.0.1',)
+# INTERNAL_IPS = ('127.0.0.1',)
+INTERNAL_IPS = ('192.168.2.47',)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -97,6 +98,8 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (
     os.path.join(STATIC_ROOT, ''),
     os.path.join(os.path.dirname(__file__), '/account/templates/'),
+    os.path.join(STATIC_ROOT, '/admin/'),
+    os.path.join(STATIC_ROOT, '/debug_toolbar/')
 )
 
 
@@ -104,8 +107,8 @@ TEMPLATE_DIRS = (
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_HOST = 'smtp.exmail.qq.com'
 EMAIL_HOST = 'smtp.163.com'
-EMAIL_HOST_USER = 'cryhelyzxx@163.com'
-EMAIL_HOST_PASSWORD = 'zxx&qxf865320179'
+EMAIL_HOST_USER = 'youremail@163.com'
+EMAIL_HOST_PASSWORD = 'yourpassword'
 EMAIL_USER_TLS = True
 '''
 TEMPLATE_CONTEXT_PROCESSORS = (
