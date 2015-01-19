@@ -1,16 +1,17 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 </head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{STATIC_URL}}bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet" />
     {% block extracss %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
 <body>
 {% block content %}{% endblock %}{% block footer %}{% endblock %}
 <script src="{{STATIC_URL}}bower_components/jquery/dist/jquery.min.js"></script>
-<script src="{{STATIC_URL}}bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-{% block extra_js %}{% endblock %}
+<script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+{% block extrajs %}{% endblock %}
 </body>
 </html>

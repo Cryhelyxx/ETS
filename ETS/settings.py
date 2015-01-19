@@ -114,8 +114,8 @@ TEMPLATE_DIRS = (
 # EMAIL_HOST = 'smtp.exmail.qq.com'
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = '25'
-EMAIL_HOST_USER = 'youremail@163.com'
-EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_HOST_USER = 'cryhelyzxx@163.com'
+EMAIL_HOST_PASSWORD = 'zxx&qxf865320179'
 EMAIL_USER_TLS = True
 
 '''

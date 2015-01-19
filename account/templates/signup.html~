@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block extracss %}
-<link href="{{STATIC_URL}}bower_components/Buttons/css/buttons.min.css" rel="stylesheet">
-<link href="{{STATIC_URL}}css/style.css" rel="stylesheet">
-<link href="{{STATIC_URL}}css/navbar.css" rel="stylesheet">
-<link href="{{STATIC_URL}}css/signup.css" rel="stylesheet">
-<link href="{{STATIC_URL}}css/sticky-footer.css" rel="stylesheet">
+<link href="../../static/bower_components/Buttons/css/buttons.min.css" rel="stylesheet">
+<link href="../../static/css/style.css" rel="stylesheet">
+<link href="../../static/css/navbar.css" rel="stylesheet">
+<link href="../../static/css/signup.css" rel="stylesheet">
+<link href="../../static/css/sticky-footer.css" rel="stylesheet">
 {% endblock %}
 
 {% block title %}
@@ -92,7 +92,7 @@
 
 
 {% endblock %}
-{% block extrajs %}
+{% block extra_js %}
 
 
 {% endblock %}
