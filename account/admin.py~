@@ -70,15 +70,15 @@ class MyUserAdmin(UserAdmin):
     list_filter = ('is_admin',)
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
-        ('用户核心信息', {'fields': ('username', 'email', 'password')}),
-        ('个人基本信息', {'fields': ('avatar', 'nickname', 'realname', 'qq', 'weixin', 'mobilephone','certificate', 'address')}),
+        (None, {'fields': ('username', 'email', 'password', 'avatar', 'nickname', 'realname', 'qq', 'weixin', 'mobilephone','certificate', 'address')}),
+        ('个人信息', {'fields': ('created_at', 'updated_at')}),
         ('Open token info',
             {
                 'fields': ('access_token', 'refresh_token', 'expires_in')
             }
         ),
         ('权限', {'fields': ('is_delete', 'is_admin', 'is_active', 'is_lock')}),
-        ('重要日期', {'fields': ('last_login', 'created_at', 'updated_at',)}),
+        ('重要日期', {'fields': ('last_login',)}),
     )
     add_fieldsets = (
         (None,

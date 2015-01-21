@@ -3,7 +3,6 @@
 from django.db import models
 # from django.contrib import admin
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
-from django.contrib.sites.models import Site
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -47,13 +46,13 @@ class User(AbstractBaseUser):
     username = models.CharField(null=False, max_length=50, unique=True)
     email = models.CharField(null=False, max_length=100, unique=True)
     avatar = models.URLField(blank=True)
-    nickname = models.CharField(null=True, max_length=50, blank=True)
-    realname = models.CharField(null=True, max_length=50, blank=True)
-    qq = models.CharField(null=True, max_length=50, blank=True)
-    weixin = models.CharField(null=True, max_length=100, blank=True)
-    mobilephone = models.CharField(null=True, max_length=20, blank=True)
-    certificate = models.CharField(null=True, max_length=100, blank=True)
-    address = models.CharField(null=True, max_length=200, blank=True)
+    nickname = models.CharField(null=True, max_length=50)
+    realname = models.CharField(null=True, max_length=50)
+    qq = models.CharField(null=True, max_length=50)
+    weixin = models.CharField(null=True, max_length=100)
+    mobilephone = models.CharField(null=True, max_length=20)
+    certificate = models.CharField(null=True, max_length=100)
+    address = models.CharField(null=True, max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_delete = models.BooleanField(default=False)

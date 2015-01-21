@@ -1,1 +1,6 @@
-登录成功!!!这里是主页!!!
+{% if user.is_authenticated %}
+    <p>欢迎, {{ user.username }}。谢谢您的来访。</p>
+    <a href="/account/logout/">注销退出</a>
+{% else %}
+    <p>欢迎, 请登录。</p>
+{% endif %}

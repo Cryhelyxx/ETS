@@ -1,61 +1,91 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
-from django.shortcuts import render, render_to_response
+
+import time
+from django.shortcuts import render, redirect
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import RequestContext
-from django import forms
 
 from models import User
 from account_md5 import md5
 from mailer import send_email
 
 # Create your views here.
-def login(req):
-    if req.method == 'POST':
-        # username = req.GET.get('username')
-        username = req.POST.get('username')
-        password = req.POST.get('password')
-        password = md5(password)
-        user = User.objects.filter(username__exact = username, password__exact = password)
-        if user:
-            response = HttpResponseRedirect('/account/index/')
-            response.set_cookie('username', username, 3600)
-            return response
-        else:
-            return HttpResponseRedirect('/account/signin/')
-    return render_to_response('signin.html', None, context_instance=RequestContext(req))
+@login_required(login_url='/account/signin/')
+def home(request):
+    if request.user.is_authenticated():
+        # Do something for authenticated users.
+        return render(request, 'index.html')
+    else:
+        # Do something for anonymous users.
+        return HttpResponse('禁用的账户')
 
-# 登录成功
-def index(req):
-    username = req.COOKIES.get('username', '')
-    return render_to_response('index.html', {'username': username})
+def login_view(request):
+    if request.method == 'POST':
+        # username = request.GET.get('username')
+        # username = request.POST.get('username')
+        username = request.POST['username']
+        password = request.POST['password']
+        # user = User.objects.filter(username__exact = username, password__exact = password)
+        user = authenticate(username = username, password = password)
+        if user:
+            if user.is_active:
+                login(request, user)
+                # Redirect to a success page.
+                # return render(request, 'index.html')
+                return redirect('/')
+            else:
+                # Return a 'disable account' error message.
+                return HttpResponse('禁用的账户')
+        else:
+            # Return an 'invalid login' error message.
+            return redirect('/account/signin/')
+        
+    return render(request, 'signin.html')
+
 
 # 注册
-def register(req):
-    if req.method == 'POST':
-        username = req.POST.get('username')
-        password = req.POST.get('password')
-        email = req.POST.get('email')
+def register_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        email = request.POST['email']
         print username
         print password
         print email
-        password = md5(password)
-        user = User.objects.filter(username__exact = username, password__exact = password)
+        # user1 = User.objects.get(username__exact = username)
+        # user2 = User.objects.get(email = email)
+        # 执行原生查询并返回模型实例
+        # raw_sql = 'select * from account_user u where u.username = %s' % username
+        #user1 = User.objects.raw(raw_sql)
+        #raw_sql = 'select * from account_user u where u.email = %s' % email
+        #user2 = User.objects.raw(raw_sql)
+        user1 = User.objects.filter(username=username)
+        user2 = User.objects.filter(email=email)
         # 如果用户已存在
-        if user:
-            return HttpResponse('用户已存在， 请直接登录')
-        # 插入到数据库
-        User.objects.create(username = username, password = password, email = email)
-        send_email(email, username)
-        return HttpResponse('注册成功！')
-    return render_to_response('signup.html', None, context_instance=RequestContext(req))
+        if user1:
+            msg = '用户名 %s 已存在， 请重试！' %  username
+            return HttpResponse(msg)
+        elif user2:
+            msg = '邮箱 %s 已存在， 请重试！' % email
+            return HttpResponse(msg)
+        else:
+            # 插入到数据库
+            user = User.objects.create_user(username, email, password)
+            user.is_active = True
+            user.save()
+            send_email(email, username)
+            return HttpResponse('注册成功！')
+    else:
+        return render(request, 'signup.html')
 
-# 注销
-def logout(req):
-    response = HttpResponse('注销成功!')
-    # 清理cookie里保存的username
-    response.delete_cookie('username')
-    return response
+
+def logout_view(request):
+    logout(request)
+    # Redirect to a success page.
+    return redirect('/')
+
 
 
