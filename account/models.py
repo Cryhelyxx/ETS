@@ -31,7 +31,7 @@ class UserManager(BaseUserManager):
         ''' 创建超级用户 '''
         
         user = self.create_user(username, email, password)
-        user.is_superuser = True
+        user.is_admin = True
         user.save(using = self._db)
         return user
 
@@ -61,7 +61,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     updated_at = models.DateTimeField(auto_now=True)
     is_delete = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    # is_admin = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
     is_lock = models.BooleanField(default=False)
     access_token = models.CharField(max_length=100, blank=True)
     refresh_token = models.CharField(max_length=100, blank=True)
@@ -99,7 +99,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     @property
     def is_staff(self):
         "Is the user a member of staff?"
-        return self.is_superuser
+        return self.is_admin
 
 
 

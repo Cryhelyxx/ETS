@@ -53,7 +53,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = MyUser
-        fields = ('username', 'email', 'is_active', 'is_superuser' )
+        fields = ('username', 'email', 'is_active', 'is_admin' )
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -67,20 +67,20 @@ class MyUserAdmin(UserAdmin):
     form = UserChangeForm
     add_form = UserCreateForm
 
-    list_display = ('username', 'created_at', 'email', 'is_delete', 'is_superuser')
+    list_display = ('username', 'created_at', 'email', 'is_delete', 'is_admin')
     search_fields = ('username', 'email')
-    list_filter = ('is_superuser',)
+    list_filter = ('is_admin',)
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
-        ('Personal info', {'fields': ('avatar', 'nickname', 'realname', 'qq', 'weixin', 'mobilephone','certificate', 'address')}),
+        ('个人信息', {'fields': ('avatar', 'nickname', 'realname', 'qq', 'weixin', 'mobilephone','certificate', 'address')}),
         ('Open token info',
             {
                 'fields': ('access_token', 'refresh_token', 'expires_in')
             }
         ),
-        ('Permissions', {'fields': ('is_delete', 'is_superuser', 'is_active', 'is_lock')}),
-        ('Important date', {'fields': ('last_login', 'created_at', 'updated_at',)}),
+        ('权限', {'fields': ('is_delete', 'is_admin', 'is_active', 'is_lock')}),
+        ('重要日期', {'fields': ('last_login', 'created_at', 'updated_at',)}),
     )
     add_fieldsets = (
         (None,

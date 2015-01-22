@@ -104,12 +104,13 @@ STATICFILES_DIRS = (
 
 
 # template
-'''
+
 TEMPLATE_DIRS = (
     # os.path.join(STATIC_ROOT, ''),
     os.path.join(os.path.dirname(__file__), '/account/templates/'),
+    os.path.join(BASE_DIR, 'templates'),
 )
-'''
+
 
 # email config
 # EMAIL_HOST = 'smtp.gmail.com'
