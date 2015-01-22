@@ -26,7 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'account.MyUser'
 
 # Application definition
 
@@ -63,7 +63,7 @@ ROOT_URLCONF = 'ETS.urls'
 
 WSGI_APPLICATION = 'ETS.wsgi.application'
 # INTERNAL_IPS = ('127.0.0.1',)
-INTERNAL_IPS = ('192.168.2.46',)
+INTERNAL_IPS = ('192.168.2.46', 'localhost', '127.0.0.1',)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases

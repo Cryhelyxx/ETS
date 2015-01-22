@@ -8,7 +8,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 
-from models import User
+from models import MyUser
 from account_md5 import md5
 from mailer import send_email
 

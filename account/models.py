@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-# from django.contrib import admin
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
-from django.contrib.sites.models import Site
+from django.contrib import admin
+from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
+# from django.contrib.sites.models import Site
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -31,21 +31,24 @@ class UserManager(BaseUserManager):
         ''' 创建超级用户 '''
         
         user = self.create_user(username, email, password)
-        user.is_admin = True
-        user.is_active = True
+        user.is_superuser = True
         user.save(using = self._db)
         return user
 
 
 
-class User(AbstractBaseUser):
+class MyUser(AbstractBaseUser, PermissionsMixin):
     ''' 
         用户表
         User class继续AbstractBaseUser
     '''
     # id = models.AutoField(primary_key=True)
     username = models.CharField(null=False, max_length=50, unique=True)
-    email = models.CharField(null=False, max_length=100, unique=True)
+    email = models.EmailField(
+        verbose_name = 'email address',
+        max_length = 255,
+        unique = True
+    )
     avatar = models.URLField(blank=True)
     nickname = models.CharField(null=True, max_length=50, blank=True)
     realname = models.CharField(null=True, max_length=50, blank=True)
@@ -57,12 +60,15 @@ class User(AbstractBaseUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_delete = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
-    is_admin = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    # is_admin = models.BooleanField(default=False)
     is_lock = models.BooleanField(default=False)
     access_token = models.CharField(max_length=100, blank=True)
     refresh_token = models.CharField(max_length=100, blank=True)
     expires_in = models.BigIntegerField(max_length=100, default=0)
+    
+    # groups = models.ManyToManyField(Group)
+    # user_permissions = models.ManyToManyField(Permission)
 
     objects = UserManager()
 
@@ -83,15 +89,17 @@ class User(AbstractBaseUser):
         return self.username
 
     def has_perm(self, perm, obj=None):
+        "Does the user have a specific permission?"
         return True
 
     def has_module_perms(self, app_label):
+        "Does the user have permissions to view the app `app_label`?"
         return True
 
     @property
     def is_staff(self):
-        return self.is_admin
-
+        "Is the user a member of staff?"
+        return self.is_superuser
 
 
 

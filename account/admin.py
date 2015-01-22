@@ -4,11 +4,11 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 from django import forms
-from django.contrib.auth.models import Group as DjangoGroup
+from django.contrib.auth.models import (Group, Permission)
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
-from account.models import User
+from account.models import MyUser
 
 # Register your models here.
 class UserCreateForm(forms.ModelForm):
@@ -24,7 +24,7 @@ class UserCreateForm(forms.ModelForm):
     )
 
     class Meta:
-        model = User
+        model = MyUser
         fields = ('username', 'email')
 
     def clean_password2(self):
@@ -52,7 +52,8 @@ class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = User
+        model = MyUser
+        fields = ('username', 'email', 'is_active', 'is_superuser' )
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -60,25 +61,26 @@ class UserChangeForm(forms.ModelForm):
         # field does not have access to the initial value
         return self.initial["password"]
 
+
 # 注册用户
 class MyUserAdmin(UserAdmin):
     form = UserChangeForm
     add_form = UserCreateForm
 
-    list_display = ('username', 'created_at', 'email', 'is_delete', 'is_admin')
+    list_display = ('username', 'created_at', 'email', 'is_delete', 'is_superuser')
     search_fields = ('username', 'email')
-    list_filter = ('is_admin',)
+    list_filter = ('is_superuser',)
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
-        ('用户核心信息', {'fields': ('username', 'email', 'password')}),
-        ('个人基本信息', {'fields': ('avatar', 'nickname', 'realname', 'qq', 'weixin', 'mobilephone','certificate', 'address')}),
+        (None, {'fields': ('username', 'email', 'password')}),
+        ('Personal info', {'fields': ('avatar', 'nickname', 'realname', 'qq', 'weixin', 'mobilephone','certificate', 'address')}),
         ('Open token info',
             {
                 'fields': ('access_token', 'refresh_token', 'expires_in')
             }
         ),
-        ('权限', {'fields': ('is_delete', 'is_admin', 'is_active', 'is_lock')}),
-        ('重要日期', {'fields': ('last_login', 'created_at', 'updated_at',)}),
+        ('Permissions', {'fields': ('is_delete', 'is_superuser', 'is_active', 'is_lock')}),
+        ('Important date', {'fields': ('last_login', 'created_at', 'updated_at',)}),
     )
     add_fieldsets = (
         (None,
@@ -88,8 +90,10 @@ class MyUserAdmin(UserAdmin):
             }
         ),
     )
+    search_fields = ('username','email',)
     ordering = ('created_at',)
     filter_horizontal = ()
 
 
-admin.site.register(User, MyUserAdmin)
+admin.site.register(MyUser, MyUserAdmin)
+admin.site.register(Permission)
