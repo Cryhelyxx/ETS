@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+import datetime
 from django.contrib import admin
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser, PermissionsMixin)
 # from django.contrib.sites.models import Site
@@ -43,26 +44,26 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         User class继续AbstractBaseUser
     '''
     # id = models.AutoField(primary_key=True)
-    username = models.CharField(null=False, max_length=50, unique=True)
+    username = models.CharField('用户名', null=False, max_length=50, unique=True)
     email = models.EmailField(
-        verbose_name = 'email address',
+        '邮箱地址',
         max_length = 255,
         unique = True
     )
-    avatar = models.URLField(blank=True)
-    nickname = models.CharField(null=True, max_length=50, blank=True)
-    realname = models.CharField(null=True, max_length=50, blank=True)
-    qq = models.CharField(null=True, max_length=50, blank=True)
-    weixin = models.CharField(null=True, max_length=100, blank=True)
-    mobilephone = models.CharField(null=True, max_length=20, blank=True)
-    certificate = models.CharField(null=True, max_length=100, blank=True)
-    address = models.CharField(null=True, max_length=200, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    is_delete = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
-    is_lock = models.BooleanField(default=False)
+    avatar = models.URLField('头像', blank=True)
+    nickname = models.CharField('昵称', null=True, max_length=50, blank=True)
+    realname = models.CharField('真实姓名', null=True, max_length=50, blank=True)
+    qq = models.CharField('QQ号', null=True, max_length=50, blank=True)
+    weixin = models.CharField('微信号', null=True, max_length=100, blank=True)
+    mobilephone = models.CharField('手机号码', null=True, max_length=20, blank=True)
+    certificate = models.CharField('证件号码', null=True, max_length=100, blank=True)
+    address = models.CharField('所在地', null=True, max_length=200, blank=True)
+    created_at = models.DateTimeField('加入时间', default=datetime.datetime.now, editable=True)
+    updated_at = models.DateTimeField('更新时间', default=datetime.datetime.now, editable=True)
+    is_delete = models.BooleanField('是否已删除', default=False)
+    is_active = models.BooleanField('是否已激活', default=True)
+    is_admin = models.BooleanField('是否是管理员', default=False, help_text='只有管理员才允许访问管理后台')
+    is_lock = models.BooleanField('是否锁住', default=False)
     access_token = models.CharField(max_length=100, blank=True)
     refresh_token = models.CharField(max_length=100, blank=True)
     expires_in = models.BigIntegerField(max_length=100, default=0)
@@ -76,7 +77,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ('email',)
 
     class Meta:
-        ordering = ('-created_at',)
+        ordering = ('-created_at',)     # 降序
 
     def __unicode__(self):
         return self.username
@@ -100,6 +101,5 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     def is_staff(self):
         "Is the user a member of staff?"
         return self.is_admin
-
 
 

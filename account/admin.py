@@ -70,7 +70,7 @@ class MyUserAdmin(UserAdmin):
     list_display = ('username', 'created_at', 'email', 'is_delete', 'is_admin')
     search_fields = ('username', 'email')
     list_filter = ('is_admin',)
-    readonly_fields = ('created_at', 'updated_at')
+    # readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
         ('个人信息', {'fields': ('avatar', 'nickname', 'realname', 'qq', 'weixin', 'mobilephone','certificate', 'address')}),
